@@ -3,8 +3,6 @@ package com.example.shoppingmall;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.Toast;
-
 import com.example.shopping_core.delegates.ShoppingDelegate;
 import com.example.shopping_core.net.RestClient;
 import com.example.shopping_core.net.callback.IError;

@@ -1,13 +1,8 @@
 package com.example.shopping_core.net.callback;
 
 import android.os.Handler;
-
-import com.example.shopping_core.app.Latte;
 import com.example.shopping_core.ui.LatteLoader;
 import com.example.shopping_core.ui.LoaderStyle;
-
-
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

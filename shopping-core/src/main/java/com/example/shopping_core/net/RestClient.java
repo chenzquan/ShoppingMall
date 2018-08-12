@@ -1,8 +1,6 @@
 package com.example.shopping_core.net;
 
 import android.content.Context;
-
-import com.example.shopping_core.app.Latte;
 import com.example.shopping_core.net.callback.IError;
 import com.example.shopping_core.net.callback.IFailure;
 import com.example.shopping_core.net.callback.IRequest;
@@ -10,13 +8,17 @@ import com.example.shopping_core.net.callback.ISuccess;
 import com.example.shopping_core.net.callback.RequestCallBacks;
 import com.example.shopping_core.ui.LatteLoader;
 import com.example.shopping_core.ui.LoaderStyle;
-import com.squareup.okhttp.RequestBody;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+
 
 /**
  * Created by 权 on 2018/8/9.
@@ -33,6 +35,7 @@ public class RestClient {
     private final IError ERROR;
 
     private final RequestBody BODY;
+    private final File FILE;
 
     private final LoaderStyle LOADER_STYLE;
 
@@ -46,6 +49,7 @@ public class RestClient {
                       IFailure failure,
                       IError error,
                       RequestBody body,
+                      File file,
                       LoaderStyle loader_style,
                       Context context) {
         this.URL = url;
@@ -55,6 +59,7 @@ public class RestClient {
         this.FAILURE = failure;
         this.ERROR = error;
         this.BODY = body;
+        this.FILE = file;
         this.LOADER_STYLE = loader_style;
         this.CONTEXT = context;
     }
@@ -86,18 +91,30 @@ public class RestClient {
             case POST:
                 call = restService.post(URL,PARAMS);
                 break;
+            case POST_RAW:
+                call = restService.postRaw(URL,BODY);
+                break;
             case PUT:
                 call = restService.put(URL,PARAMS);
                 break;
+            case PUT_RAW:
+                call = restService.putRaw(URL,BODY);
+                break;
             case DELETE:
                 call = restService.delete(URL,PARAMS);
+                break;
+            case UPLOAD:
+                final RequestBody requestBody =
+                        RequestBody.create(MediaType.parse("multipart/form-data"),FILE);//第一个参数是文件类型
+                final MultipartBody.Part body = MultipartBody.Part.createFormData("file",FILE.getName(),requestBody);
+                call = restService.upload(URL,body);
                 break;
             default:
                 break;
         }
 
         if(call != null){
-            call.enqueue(getRequestCallback());
+            call.enqueue(getRequestCallback()); //异步
         }
 
 
@@ -116,17 +133,32 @@ public class RestClient {
     }
 
     public final void post(){
+        if(BODY == null){
+            request(HttpMethod.POST);
+        }else{
+            if(!PARAMS.isEmpty()){
+                throw new RuntimeException("params must be null");
+            }
+            request(HttpMethod.POST_RAW);
+        }
+
         request(HttpMethod.POST);
     }
 
     public final void put(){
-        request(HttpMethod.PUT);
+        if(BODY == null){
+            request(HttpMethod.PUT);
+        }else{
+            if(!PARAMS.isEmpty()){
+                throw new RuntimeException("params must be null");
+            }
+            request(HttpMethod.PUT_RAW);
+        }
+
     }
 
     public final void delete(){
         request(HttpMethod.DELETE);
     }
-
-
 
 }
