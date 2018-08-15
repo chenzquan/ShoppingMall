@@ -1,4 +1,4 @@
-package com.example.shopping_core.ui;
+package com.example.shopping_core.ui.loader;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatDialog;
@@ -7,7 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.shopping_core.R;
-import com.example.shopping_core.util.DimenUtil;
+import com.example.shopping_core.util.dimens.DimenUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;

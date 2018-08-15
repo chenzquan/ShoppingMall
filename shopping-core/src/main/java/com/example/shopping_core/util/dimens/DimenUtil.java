@@ -1,4 +1,4 @@
-package com.example.shopping_core.util;
+package com.example.shopping_core.util.dimens;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;

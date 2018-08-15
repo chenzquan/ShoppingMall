@@ -3,8 +3,8 @@ package com.example.shoppingmall;
 import android.app.Application;
 
 import com.example.shopping_core.app.Latte;
+import com.example.shopping_core.net.interceptors.DebugInterceptor;
 import com.example.shopping_ec.icon.FontECMedule;
-import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 /**
@@ -18,7 +18,8 @@ public class ExampleApp extends Application {
         Latte.init(this)
                 .withIcon(new FontECMedule())
                 .withIcon(new FontAwesomeModule())
-                .withApiHost("https://api.github.com/")
+                .withApiHost("http://127.0.0.1/")
+                .withInterceptor(new DebugInterceptor("index", R.raw.test))
                 .configue();
 
 

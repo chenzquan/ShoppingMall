@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.shopping_core.activities.ProxyActivity;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
@@ -27,23 +29,28 @@ public abstract class BaseDelegate extends SwipeBackFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = null;
+        final View rootView;
 
         if(setLayout() instanceof Integer){
             rootView = inflater.inflate((Integer) setLayout(),container,false);
         }else if(setLayout() instanceof View){
             rootView = (View) setLayout();
+        }else{
+            throw new ClassCastException("setLayout() type must be int for view");
         }
 
-        if(rootView != null){
-            unbinder = ButterKnife.bind(this,rootView); //butterknife 绑定
-            onBindView(savedInstanceState,rootView);
-        }
+
+        unbinder = ButterKnife.bind(this,rootView); //butterknife 绑定
+        onBindView(savedInstanceState,rootView);
 
         return rootView;
 
     }
 
+
+    public final ProxyActivity getProxyActivity(){
+        return (ProxyActivity) _mActivity;
+    }
 
     @Override
     public void onDestroyView() {

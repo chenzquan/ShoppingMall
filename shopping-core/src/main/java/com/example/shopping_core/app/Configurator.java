@@ -6,15 +6,16 @@ import com.joanzapata.iconify.Iconify;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import okhttp3.Interceptor;
+
 /**
  * Created by 权 on 2018/8/7.
  */
 public class Configurator {
 
-    private static final HashMap<String,Object> LATTE_CONFIGS = new HashMap<>(); //映射
-
-
+    private static final HashMap<Object,Object> LATTE_CONFIGS = new HashMap<>(); //映射
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
+    private static final ArrayList<Interceptor> INTERCEPTORS = new ArrayList<>();
 
     //还没有配置好
     private Configurator(){  //构建方法
@@ -38,10 +39,9 @@ public class Configurator {
     }
 
     //返回HashMap
-    public final HashMap<String,Object> getLatteConfigs(){
+    public final HashMap<Object,Object> getLatteConfigs(){
         return Configurator.LATTE_CONFIGS;
     }
-
 
 
     public final Configurator withApiHost(String host){
@@ -56,8 +56,6 @@ public class Configurator {
             throw new RuntimeException("Configuration is not ready, call configure");
 
         }
-
-
 
     }
 
@@ -86,6 +84,18 @@ public class Configurator {
         return this;
     }
 
+
+    public final Configurator withInterceptor(Interceptor interceptor){
+        INTERCEPTORS.add(interceptor);
+        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR.name(),INTERCEPTORS);
+        return this;
+    }
+
+    public final Configurator withInterceptor(ArrayList<Interceptor> interceptors){
+        INTERCEPTORS.addAll(interceptors);
+        LATTE_CONFIGS.put(ConfigType.INTERCEPTOR.name(),INTERCEPTORS);
+        return this;
+    }
 
 
 

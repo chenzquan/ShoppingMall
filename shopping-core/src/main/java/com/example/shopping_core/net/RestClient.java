@@ -1,13 +1,15 @@
 package com.example.shopping_core.net;
 
 import android.content.Context;
+
+import com.example.shopping_core.download.DownLoadHandler;
 import com.example.shopping_core.net.callback.IError;
 import com.example.shopping_core.net.callback.IFailure;
 import com.example.shopping_core.net.callback.IRequest;
 import com.example.shopping_core.net.callback.ISuccess;
 import com.example.shopping_core.net.callback.RequestCallBacks;
-import com.example.shopping_core.ui.LatteLoader;
-import com.example.shopping_core.ui.LoaderStyle;
+import com.example.shopping_core.ui.loader.LatteLoader;
+import com.example.shopping_core.ui.loader.LoaderStyle;
 
 import java.io.File;
 import java.util.Map;
@@ -40,6 +42,9 @@ public class RestClient {
     private final LoaderStyle LOADER_STYLE;
 
     private final Context CONTEXT;
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
 
 
     public RestClient(String url,
@@ -50,6 +55,9 @@ public class RestClient {
                       IError error,
                       RequestBody body,
                       File file,
+                      String downLoadDir,
+                      String extension,
+                      String name,
                       LoaderStyle loader_style,
                       Context context) {
         this.URL = url;
@@ -62,6 +70,9 @@ public class RestClient {
         this.FILE = file;
         this.LOADER_STYLE = loader_style;
         this.CONTEXT = context;
+        this.DOWNLOAD_DIR = downLoadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
     }
 
     public static RestClientBuilder builder(){
@@ -160,5 +171,18 @@ public class RestClient {
     public final void delete(){
         request(HttpMethod.DELETE);
     }
+
+    public final void download(){
+        new DownLoadHandler(URL,
+                REQUEST,
+                DOWNLOAD_DIR,
+                EXTENSION,
+                NAME,
+                SUCCESS,
+                FAILURE,
+                ERROR).handleDownload();
+    }
+
+
 
 }

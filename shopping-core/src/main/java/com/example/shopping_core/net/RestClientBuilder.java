@@ -5,7 +5,7 @@ import com.example.shopping_core.net.callback.IError;
 import com.example.shopping_core.net.callback.IFailure;
 import com.example.shopping_core.net.callback.IRequest;
 import com.example.shopping_core.net.callback.ISuccess;
-import com.example.shopping_core.ui.LoaderStyle;
+import com.example.shopping_core.ui.loader.LoaderStyle;
 
 
 import java.io.File;
@@ -32,7 +32,27 @@ public class RestClientBuilder {
     private Context mContext = null;
     private LoaderStyle mLoaderStyle = null;
 
+
+    private String mdownloadDir = null; //下载文件的存储目录
+    private String mExtension = null;
+    private String mName = null;
+
     RestClientBuilder() {
+    }
+
+    public final RestClientBuilder dir(String dir){
+        this.mdownloadDir = dir;
+        return this;
+    }
+
+    public final RestClientBuilder extension(String extension){
+        this.mExtension = extension;
+        return this;
+    }
+
+    public final RestClientBuilder name(String name){
+        this.mName = name;
+        return this;
     }
 
 
@@ -40,7 +60,6 @@ public class RestClientBuilder {
         this.mUrl = url;
         return this;
     }
-
 
 
     public final RestClientBuilder params(WeakHashMap<String,Object> param){
@@ -98,7 +117,7 @@ public class RestClientBuilder {
         return this;
     }
 
-    public final RestClientBuilder  loader(Context context){
+    public final RestClientBuilder loader(Context context){
         this.mContext = context;
         this.mLoaderStyle = LoaderStyle.BallSpinFadeLoaderIndicator;
         return this;
@@ -116,6 +135,9 @@ public class RestClientBuilder {
                 mError,
                 mBoby,
                 mFile,
+                mdownloadDir,
+                mExtension,
+                mName,
                 mLoaderStyle,
                 mContext
                 );

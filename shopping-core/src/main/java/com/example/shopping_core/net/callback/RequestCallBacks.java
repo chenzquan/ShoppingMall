@@ -1,8 +1,8 @@
 package com.example.shopping_core.net.callback;
 
 import android.os.Handler;
-import com.example.shopping_core.ui.LatteLoader;
-import com.example.shopping_core.ui.LoaderStyle;
+import com.example.shopping_core.ui.loader.LatteLoader;
+import com.example.shopping_core.ui.loader.LoaderStyle;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,7 +18,7 @@ public class RequestCallBacks implements Callback<String>{
     private final IFailure FAILURE;
     private final IError ERROR;
 
-    private final LoaderStyle LOADER_SYTLE;
+    private final LoaderStyle LOADER_SYTLE;  //加载图标的样式
 
     private static final Handler HANDLER = new Handler();
 
@@ -45,7 +45,6 @@ public class RequestCallBacks implements Callback<String>{
             }
         }
 
-
         stopLoading();
     }
 
@@ -58,7 +57,6 @@ public class RequestCallBacks implements Callback<String>{
         if(REQUEST != null){
             REQUEST.onRequestEnd();
         }
-
         stopLoading();
     }
 

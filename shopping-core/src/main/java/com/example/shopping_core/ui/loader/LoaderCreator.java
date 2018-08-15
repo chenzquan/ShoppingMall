@@ -1,4 +1,4 @@
-package com.example.shopping_core.ui;
+package com.example.shopping_core.ui.loader;
 
 import android.content.Context;
 
