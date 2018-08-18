@@ -9,6 +9,8 @@ import com.example.shopping_core.activities.ProxyActivity;
 import com.example.shopping_core.delegates.ShoppingDelegate;
 import com.example.shopping_ec.launcher.LauncherDelegate;
 import com.example.shopping_ec.launcher.LauncherScrollDelegate;
+import com.example.shopping_ec.sign.SignInDelegate;
+import com.example.shopping_ec.sign.SignUpDelegate;
 
 public class MainActivity extends ProxyActivity {
 
@@ -24,7 +26,9 @@ public class MainActivity extends ProxyActivity {
     @Override
     public ShoppingDelegate setRootDelegate() {
        // return new ExampleDelegate();  //创一个Fragment
-        return new LauncherDelegate();
+      //  return new LauncherDelegate();
+//        return new SignUpDelegate();
+        return new SignInDelegate();
     }
 
 }

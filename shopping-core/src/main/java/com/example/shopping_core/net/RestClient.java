@@ -10,11 +10,9 @@ import com.example.shopping_core.net.callback.ISuccess;
 import com.example.shopping_core.net.callback.RequestCallBacks;
 import com.example.shopping_core.ui.loader.LatteLoader;
 import com.example.shopping_core.ui.loader.LoaderStyle;
-
 import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
-
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -152,8 +150,6 @@ public class RestClient {
             }
             request(HttpMethod.POST_RAW);
         }
-
-        request(HttpMethod.POST);
     }
 
     public final void put(){

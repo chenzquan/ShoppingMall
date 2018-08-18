@@ -34,7 +34,7 @@ public class LauncherScrollDelegate extends ShoppingDelegate implements OnItemCl
                 .setPageIndicator(new int []{R.drawable.dot_normal,R.drawable.dot_focus})
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL)
                 .setOnItemClickListener(this)
-                .setCanLoop(false);
+                .setCanLoop(true); //设置是否循环
     }
 
 
