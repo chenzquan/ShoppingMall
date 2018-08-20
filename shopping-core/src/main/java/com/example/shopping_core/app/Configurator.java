@@ -2,10 +2,8 @@ package com.example.shopping_core.app;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import okhttp3.Interceptor;
 
 /**

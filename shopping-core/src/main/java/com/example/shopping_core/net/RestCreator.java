@@ -39,30 +39,6 @@ public class RestCreator {
 
     }
 
-    /*
-    创建Okhttp
-     */
-    private static final class OkHttpHolder{
-        private static final int TIME_OUT = 60;
-
-        private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
-        private static final ArrayList<Interceptor> INTERCEPTORS =
-                (ArrayList<Interceptor>) Latte.getConfigurations().get(ConfigType.INTERCEPTOR.name());
-
-        private static OkHttpClient.Builder addInterceptor(){
-            if(INTERCEPTORS != null || !INTERCEPTORS.isEmpty()){
-                for(Interceptor interceptor : INTERCEPTORS){
-                    BUILDER.addInterceptor(interceptor);
-                }
-            }
-            return BUILDER;
-        }
-
-        private static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
-                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .build();
-    }
-
 
     /*
     service接口
@@ -75,6 +51,31 @@ public class RestCreator {
 
     public static RestService getRestService(){
         return RestServiceHolder.REST_SERVICE;
+    }
+
+
+    /*
+   创建Okhttp
+    */
+    private static final class OkHttpHolder{
+        private static final int TIME_OUT = 60;
+
+        private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
+        private static final ArrayList<Interceptor> INTERCEPTORS =
+                (ArrayList<Interceptor>) Latte.getConfigurations().get(ConfigType.INTERCEPTOR.name());
+
+        private static OkHttpClient.Builder addInterceptor(){
+            if(INTERCEPTORS != null && !INTERCEPTORS.isEmpty()){
+                for(Interceptor interceptor : INTERCEPTORS){
+                    BUILDER.addInterceptor(interceptor);
+                }
+            }
+            return BUILDER;
+        }
+
+        private static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .build();
     }
 
 }

@@ -81,7 +81,7 @@ public class RestClient {
     网络请求 根据方法判断
      */
     public void request(HttpMethod method){
-        final RestService restService = RestCreator.getRestService();
+        final RestService restService = RestCreator.getRestService(); //取全局变量中的service
         Call<String> call = null;
 
         if(REQUEST != null){

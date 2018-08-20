@@ -22,7 +22,7 @@ import okhttp3.RequestBody;
 public class RestClientBuilder {
 
     private String mUrl = null;
-    private Map<String,Object> PARAMS = RestCreator.getParams();
+    private WeakHashMap<String,Object> PARAMS = RestCreator.getParams();
     private IRequest mRequest = null;
     private ISuccess mSuccess = null;
     private IFailure mFailure = null;

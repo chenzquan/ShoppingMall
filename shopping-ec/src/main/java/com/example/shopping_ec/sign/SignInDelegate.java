@@ -1,5 +1,6 @@
 package com.example.shopping_ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -9,8 +10,11 @@ import android.view.View;
 import com.example.shopping_core.delegates.ShoppingDelegate;
 import com.example.shopping_core.net.RestClient;
 import com.example.shopping_core.net.callback.ISuccess;
+import com.example.shopping_core.util.log.LatteLogger;
 import com.example.shopping_ec.R;
 import com.example.shopping_ec.R2;
+import com.example.shopping_ec.database.DaoMaster;
+import com.example.shopping_ec.database.DatabaseManager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,15 +32,28 @@ public class SignInDelegate extends ShoppingDelegate {
     @BindView(R2.id.edit_sign_in_password)
     TextInputEditText mPassword = null;
 
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof ISignListener){
+            mISignListener = (ISignListener) activity;
+        }
+    }
+
     @OnClick(R2.id.btn_sign_in)
     void onClickSignIn(){
         if(checkForm()){
             RestClient.builder()
-                    .url("")
+                    .url("http://39.108.2.27/RestServer/api/user_profile.php")
+                    .params("email",mEmail.getText().toString())
+                    .params("password",mPassword.getText().toString())
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {
-
+                            LatteLogger.json("USER_PROFILE",response);
+                            SignHandler.onSignIn(response,mISignListener);
                         }
                     })
                     .build()

@@ -18,7 +18,7 @@ public class DatabaseManager {
 
     }
 
-    private DatabaseManager init(Context context){
+    public DatabaseManager init(Context context){
         initDao(context);
         return this;
     }
@@ -37,13 +37,18 @@ public class DatabaseManager {
         final Database db = helper.getWritableDb();
         mDaoSession = new DaoMaster(db).newSession();
         mDao = mDaoSession.getUserProfileDao();
+
+//        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.OpenHelper(context,"fast_ec.db",null);
+//        DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
+//        mDaoSession = daoMaster.newSession();
+//        mDao = mDaoSession.getUserProfileDao();
+
     }
 
 
     public final UserProfileDao getmDao(){
         return mDao;
     }
-
 
 
 

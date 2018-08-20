@@ -1,17 +1,24 @@
 package com.example.shopping_ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.shopping_core.delegates.ShoppingDelegate;
 import com.example.shopping_core.net.RestClient;
+import com.example.shopping_core.net.callback.IError;
+import com.example.shopping_core.net.callback.IFailure;
+import com.example.shopping_core.net.callback.IRequest;
 import com.example.shopping_core.net.callback.ISuccess;
+import com.example.shopping_core.util.log.LatteLogger;
 import com.example.shopping_ec.R;
 import com.example.shopping_ec.R2;
+import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,12 +41,22 @@ public class SignUpDelegate extends ShoppingDelegate {
     @BindView(R2.id.edit_sign_up_repeat_password)
     TextInputEditText mRePassword = null;
 
+    private ISignListener mISignListener = null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof ISignListener){
+            mISignListener = (ISignListener) activity;
+        }
+    }
 
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp(){
+        Log.d("SignUpDelegate","ccehzidhsea");
         if(checkForm()){
             RestClient.builder()
-                    .url("")
+                    .url("http://39.108.2.27/RestServer/api/user_profile.php")
                     .params("name",mName.getText().toString())
                     .params("email",mEmail.getText().toString())
                     .params("phone",mPhone.getText().toString())
@@ -47,7 +64,32 @@ public class SignUpDelegate extends ShoppingDelegate {
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {
+                         //   LatteLogger.json("USER_PROFILE",response);
+                            Log.d("SignUpDelegate",response);
+                            SignHandler.onSignUp(response,mISignListener);
+                        }
+                    })
+                    .failure(new IFailure() {
+                        @Override
+                        public void onFailure() {
+                            Log.d("SignUpDelegate","sssssss");
+                        }
+                    })
+                    .error(new IError() {
+                        @Override
+                        public void onError(int code, String msg) {
+                            Log.d("SignUpDelegate",String.valueOf(code) + "    " + msg);
+                        }
+                    })
+                    .request(new IRequest() {
+                        @Override
+                        public void onRequestStart() {
+                            Log.d("SignUpDelegate","qqqweq");
+                        }
 
+                        @Override
+                        public void onRequestEnd() {
+                            Log.d("SignUpDelegate","dfsidufoisdjf");
                         }
                     })
                     .build()
@@ -55,10 +97,9 @@ public class SignUpDelegate extends ShoppingDelegate {
 
 
 
-        }else{
-
-            Toast.makeText(getContext(),"验证通过",Toast.LENGTH_SHORT).show();
         }
+
+        Log.d("Sign","xcxcvjhdsjkf");
 
     }
 

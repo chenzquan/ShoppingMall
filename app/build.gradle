@@ -25,4 +25,8 @@ dependencies {
 
     compile project(':shopping-ec')
     annotationProcessor project(':shopping-complier')
+
+    //查看数据库
+    compile 'com.facebook.stetho:stetho:1.4.2'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.4.2'
 }

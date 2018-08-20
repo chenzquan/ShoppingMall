@@ -4,12 +4,13 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
+
 /**
  * 作者：Created by 权.
  * 时间：2018/8/18.
  */
 
-@Entity(nameInDb = "user_profile")
+@Entity(nameInDb = "user_profile")//表名
 public class UserProfile {
 
     @Id
