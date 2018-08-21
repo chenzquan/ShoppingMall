@@ -27,7 +27,7 @@ public class ExampleDelegate extends ShoppingDelegate{
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        testRestClient();
+ //       testRestClient();
 //        TextView textView = (TextView) rootView.findViewById(R.id.tv);
 //        textView.setText(FileUtil.getSdDir());
     }

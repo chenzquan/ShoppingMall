@@ -66,7 +66,7 @@ public class SignUpDelegate extends ShoppingDelegate {
                         public void onSuccess(String response) {
                          //   LatteLogger.json("USER_PROFILE",response);
                             Log.d("SignUpDelegate",response);
-                            SignHandler.onSignUp(response,mISignListener);
+                            SignHandler.onSignUp(response,mISignListener); //写入数据并执行注册的回调
                         }
                     })
                     .failure(new IFailure() {
