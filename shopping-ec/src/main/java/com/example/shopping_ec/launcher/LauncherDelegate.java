@@ -1,12 +1,9 @@
 package com.example.shopping_ec.launcher;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-
-
 import com.example.shopping_core.app.AccountManager;
 import com.example.shopping_core.app.IUserChecker;
 import com.example.shopping_core.delegates.ShoppingDelegate;
@@ -18,10 +15,8 @@ import com.example.shopping_core.util.timer.BaseTimerTask;
 import com.example.shopping_core.util.timer.ITimerListener;
 import com.example.shopping_ec.R;
 import com.example.shopping_ec.R2;
-
 import java.text.MessageFormat;
 import java.util.Timer;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
