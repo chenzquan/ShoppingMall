@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.example.shopping_core.activities.ProxyActivity;
+import com.example.shopping_core.app.Latte;
 import com.example.shopping_core.delegates.ShoppingDelegate;
 import com.example.shopping_core.ui.launcher.ILauncherListener;
 import com.example.shopping_core.ui.launcher.OnLauncherFinishTag;
@@ -25,6 +26,10 @@ public class MainActivity extends ProxyActivity implements ISignListener,ILaunch
         if(actionBar != null){
             actionBar.hide();
         }
+
+        Latte.getConfigurator().withActivity(this);//放全局activity
+
+
     }
 
     @Override

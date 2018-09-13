@@ -45,7 +45,6 @@ public final class AppRegisterVisitor extends SimpleAnnotationValueVisitor7<Void
 
 
         final JavaFile javaFile = JavaFile.builder(mPackageName + ".wxapi", targetActivity)
-
                 .build();
 
 

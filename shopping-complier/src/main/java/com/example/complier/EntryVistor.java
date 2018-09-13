@@ -12,7 +12,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.SimpleAnnotationValueVisitor7;
 
 
-public final class EntryVistor extends SimpleAnnotationValueVisitor7<Void, Void> {
+public final class  EntryVistor extends SimpleAnnotationValueVisitor7<Void, Void> {
 
     private Filer mFilder = null;
     private TypeMirror mTypeMirror = null;
@@ -46,7 +46,7 @@ public final class EntryVistor extends SimpleAnnotationValueVisitor7<Void, Void>
 
 
         final JavaFile javaFile = JavaFile.builder(mPackageName + ".wxapi", targetActivity)
-                .addFileComment("微信入口文件")
+            //    .addFileComment("微信入口文件")
                 .build();
 
 

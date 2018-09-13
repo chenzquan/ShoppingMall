@@ -6,11 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.shopping_core.delegates.ShoppingDelegate;
 import com.example.shopping_core.net.RestClient;
 import com.example.shopping_core.net.callback.ISuccess;
 import com.example.shopping_core.util.log.LatteLogger;
+import com.example.shopping_core.wechat.LatteWeChat;
+import com.example.shopping_core.wechat.callbacks.IWeChatSignInCallback;
 import com.example.shopping_ec.R;
 import com.example.shopping_ec.R2;
 import com.example.shopping_ec.database.DaoMaster;
@@ -68,7 +71,13 @@ public class SignInDelegate extends ShoppingDelegate {
 
     @OnClick(R2.id.icon_sign_in_wechat)
     void onClickWeChat(){
-
+        LatteWeChat.getInstance().onSignSuccess(new IWeChatSignInCallback() {
+            @Override
+            public void onSignInSuccess(String userInfo) {
+                Toast.makeText(getContext(),userInfo,Toast.LENGTH_SHORT).show();
+            }
+        })
+        .signIn();
     }
 
 

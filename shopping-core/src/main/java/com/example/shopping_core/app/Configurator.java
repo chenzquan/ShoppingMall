@@ -1,5 +1,7 @@
 package com.example.shopping_core.app;
 
+import android.app.Activity;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 import java.util.ArrayList;
@@ -52,16 +54,19 @@ public class Configurator {
 
         if(!isReady){
             throw new RuntimeException("Configuration is not ready, call configure");
-
         }
-
     }
 
 
+
     @SuppressWarnings("unchecked")
-    public final <T> T getConfiguration(Enum<ConfigType> key){
+    public final <T> T getConfiguration(Object key){
         checkConfiguration();
-        return (T) LATTE_CONFIGS.get(key.name());
+        final Object value = LATTE_CONFIGS.get(key);
+        if(value == null){
+            throw new NullPointerException(key.toString() + "IS NULL");
+        }
+        return (T) LATTE_CONFIGS.get(key);
     }
 
 
@@ -95,6 +100,22 @@ public class Configurator {
         return this;
     }
 
+    public final Configurator withWeChatAppId(String appId){
+        LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_ID.name(),appId);
+        return this;
+    }
+
+
+    public final Configurator withWeChatAppSecret(String appSecret){
+        LATTE_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET.name(),appSecret);
+        return this;
+    }
+
+
+    public final Configurator withActivity(Activity activity){
+        LATTE_CONFIGS.put(ConfigType.ACTIVITY.name(),activity);
+        return this;
+    }
 
 
 }
